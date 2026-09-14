@@ -1,0 +1,33 @@
+Initialize an object to store the conversation history
+Afterward, you'll do the following for each interaction with the model:
+
+Encode conversation history as a string
+Fetch prompt from user
+Tokenize (optimize) prompt
+Generate output from the model using prompt and history
+Decode output
+Update conversation history
+
+
+tokenizer(...): Converts raw text into numerical tokens the model can understand.
+history_string: Previous conversation history used to provide context.
+input_text: Current user message.
+return_tensors="pt": Returns PyTorch tensors (required by the model).
+truncation=True: Truncates input if it exceeds model limits.
+max_length=512: Maximum number of tokens allowed as input.
+
+//output function
+inputs: Sends the user message and chat history to the model. This helps the chatbot understand the full conversation before replying.
+max_new_tokens: Sets the maximum length of the reply. It stops the model from writing too much text.
+no_repeat_ngram_size: Stops the model from repeating the same 3-word phrases again and again.
+repetition_penalty: Reduces repeated words in the response so the output sounds more natural.
+do_sample=True: Makes the chatbot responses more random and less fixed, so replies feel more natural.
+temperature: Controls how creative the response is. Lower = safer answers, higher = more creative answers.
+top_p: Keeps only the most likely word choices when generating text, which helps the response stay clear and meaningful.
+
+//decoding
+tokenizer.decode(outputs[0]): Converts the model’s output from numbers (tokens) back into readable text. The model first generates numbers, and this step turns them into a human-readable sentence.
+outputs[0]: Takes the first generated response from the model (since the model can generate multiple outputs internally).
+skip_special_tokens=True: Removes special tokens like padding or system symbols so they don’t appear in the final output.
+.strip(): Removes extra spaces at the beginning and end of the text for a clean output.
+print(response): Displays the final chatbot reply in the terminal so the user can see it.
