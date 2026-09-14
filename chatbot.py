@@ -47,4 +47,3 @@ while True:
     # Save bot response
     conversation_history.append(f"User: {input_text}")
     conversation_history.append(f"Bot: {response}")
-    
